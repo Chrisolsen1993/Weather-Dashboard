@@ -18,7 +18,7 @@ input.on("keypress", function (event){
     if (event.keyCode===13){
     var city = input.val();
     CurrentWeather(city);
-    // Forecast(city);
+    Forecast(city);
     input.val("");
 }});
 //when you click
@@ -30,7 +30,7 @@ function citySearch(event){
     $(".list-group").append(storage1)
     console.log(storage1)
     CurrentWeather(city);
-    // forecast(city);
+    forecast(city);
     input.val("");
     
 }
@@ -47,7 +47,7 @@ function CurrentWeather(city) {
         console.log(data)
         var cityName = data.name;
         console.log(cityName);
-    
+        // document.querySelector("#cityNew").innerText = cityName;
         $("#city-name").text(cityName);
         var windSpeed = data.wind.speed;
         $("#current-wind").text("wind: "+ windSpeed +"mph")
@@ -62,7 +62,39 @@ function CurrentWeather(city) {
        
             var iconName = data.weather[i].icon;
           console.log(iconName)
-          $(".icon").src="https://openweathermap.org/img/wn/"+ iconName +"@2x.png";
+          $(".icon").attr("src","https://openweathermap.org/img/w/"+ iconName +".png");
+        }
+        var latitude = data.coord.lat
+        var longitude = data.coord.lon
+          console.log(latitude)
+          console.log(longitude)
+        var requestUrl1 = "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        latitude +
+        "&lon=" +
+        longitude +
+        "&appid=5ec79846ae2fb1a4571dea79f4797492";
+        fetch(requestUrl1)
+        .then(function(response){
+          return response.json();
+        })
+        .then(function (data1){
+          console.log(data1)
+          var uviCurent = data1.current.uvi;
+          console.log(uviCurent)
+            roundedUvi = Math.round(uviCurent)
+
+            if (0<= roundedUvi <=2){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: green; " )
+          
+            }
+            else if (3<= roundedUvi <=7){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: yellow; height: 10px;" )
+            }
+            else if( roundedUvi >7){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: red; height: 10px;" )
+            }
+        })
+      
         //   // Setting the text of link and the href of the link
         //   link.textContent = data[i].html_url;
         //   console.log(link.textContent)
@@ -74,7 +106,25 @@ function CurrentWeather(city) {
         //  tableData.appendChild(link);
         //   createTableRow.appe ndChild(tableData);
         //   tableBody.appendChild(createTableRow);
-        }
+        
       });
   }
+  //convert the weather into fahrenheit
   function k2f(K) { return Math.floor((K - 273.15) *1.8 +32);  }
+
+  //fetch for the forecast city
+  
+function forecast(city){
+
+var requestUrl1 = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=5ec79846ae2fb1a4571dea79f4797492"
+
+fetch(requestUrl1)
+ .then(function (response) {
+  return response.json();
+})
+.then(function(data){
+  console.log(data)
+})
+
+
+  }

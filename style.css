@@ -17,6 +17,9 @@
     width: 8.5rem;
     background-color: skyblue;
 }
+#current-uv{
+    width:20px;
+}
 /* #clear-history{
     background-color: skyblue;
 } */

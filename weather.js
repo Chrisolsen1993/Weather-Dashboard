@@ -18,7 +18,7 @@ input.on("keypress", function (event){
     if (event.keyCode===13){
     var city = input.val();
     CurrentWeather(city);
-    Forecast(city);
+    forecast(city);
     input.val("");
 }});
 //when you click
@@ -83,15 +83,15 @@ function CurrentWeather(city) {
           console.log(uviCurent)
             roundedUvi = Math.round(uviCurent)
 
-            if (0<= roundedUvi <=2){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: green; " )
+            if ( roundedUvi <=2){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: green; padding:0px 10px 0px 10px;" )
           
             }
-            else if (3<= roundedUvi <=7){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: yellow; height: 10px;" )
+            else if (roundedUvi <=7){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: yellow; padding:0px 10px 0px 10px;" )
             }
-            else if( roundedUvi >7){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: red; height: 10px;" )
+            else if(roundedUvi >7){
+              $("#current-uv").append( roundedUvi).attr("style", "background-color: red; padding:0px 10px 0px 10px;" )
             }
         })
       
@@ -116,14 +116,17 @@ function CurrentWeather(city) {
   
 function forecast(city){
 
-var requestUrl1 = "https://api.openweathermap.org/data/2.5/forecast?q="+city+"&appid=5ec79846ae2fb1a4571dea79f4797492"
-
-fetch(requestUrl1)
+var requestUrl2 = "https://api.openweathermap.org/data/2.5/onecall?q=" +
+city +
+"&exclude=daily" 
++
+"&appid=5ec79846ae2fb1a4571dea79f4797492";
+fetch(requestUrl2)
  .then(function (response) {
   return response.json();
 })
-.then(function(data){
-  console.log(data)
+.then(function(data2){
+  console.log(data2)
 })
 
 

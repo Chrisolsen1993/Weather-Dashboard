@@ -25,18 +25,22 @@ input.on("keypress", function (event){
 function citySearch(event){
     event.preventDefault();
     var city = input.val().trim();
-    // var storage1=localStorage.getItem("cityname")
-    // localStorage.setItem("cityname", city);
-    // $(".list-group").append(storage1)
-    // console.log(storage1)
-    var retrievedData=localStorage.getItem("cityname") || [];
-    var cities = JSON.parse(retrievedData);
+    var cities = JSON.parse(localStorage.getItem("cityname")) || [];
     console.log(cities)
     cities.push(city)
 
-    localStorage.setItem("cityname", JSON.stringify(city));
+    localStorage.setItem("cityname", JSON.stringify(cities));
+ for (i=0 ;i<cities.length; i++){
+   console.log(cities[i])
+   var citiesLi = document.createElement("li")
+    citiesLi.textContent = cities[i]
+    citiesLi.on("click", CurrentWeather(cities[i]))
+
+    $('.list-group').append(citiesLi).attr("style", "background-color:white ;display:block;" )
+
+ }
+
     CurrentWeather(city);
-    
     input.val("");
     
 }
@@ -91,14 +95,14 @@ function CurrentWeather(city) {
             roundedUvi = Math.round(uviCurent)
 
             if ( roundedUvi <=2){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: green; padding:0px 10px 0px 10px;" )
+              $("#current-uv").text( roundedUvi).attr("style", "background-color: green; padding:0px 10px 0px 10px;" )
           
             }
             else if (roundedUvi <=7){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: yellow; padding:0px 10px 0px 10px;" )
+              $("#current-uv").text( roundedUvi).attr("style", "background-color: yellow; padding:0px 10px 0px 10px;" )
             }
             else if(roundedUvi >7){
-              $("#current-uv").append( roundedUvi).attr("style", "background-color: red; padding:0px 10px 0px 10px;" )
+              $("#current-uv").text( roundedUvi).attr("style", "background-color: red; padding:0px 10px 0px 10px;" )
             }
 
             // working on the fide days forcast
@@ -186,5 +190,5 @@ function CurrentWeather(city) {
   }
   //convert the weather into fahrenheit
   function convert(K) { return Math.floor((K - 273.15) *1.8 +32);  }
-
-  $("#clear-history").on("click",localStorage.clear())
+//by wrapping this  into an anonymous function.
+  $("#clear-history").on("click", function() {localStorage.clear()})

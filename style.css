@@ -23,3 +23,7 @@
 /* #clear-history{
     background-color: skyblue;
 } */
+ul {
+    list-style-type: none;
+    
+  }

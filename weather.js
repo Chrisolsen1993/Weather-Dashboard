@@ -29,11 +29,18 @@ function citySearch(event){
     // localStorage.setItem("cityname", city);
     // $(".list-group").append(storage1)
     // console.log(storage1)
+    var retrievedData=localStorage.getItem("cityname") || [];
+    var cities = JSON.parse(retrievedData);
+    console.log(cities)
+    cities.push(city)
+
+    localStorage.setItem("cityname", JSON.stringify(city));
     CurrentWeather(city);
     
     input.val("");
     
 }
+
 
 function CurrentWeather(city) {
     // fetch request gets a list of all the repos for the node.js organization

@@ -28,13 +28,14 @@ function citySearch(event){
     var cities = JSON.parse(localStorage.getItem("cityname")) || [];
     console.log(cities)
     cities.push(city)
-
+   
     localStorage.setItem("cityname", JSON.stringify(cities));
+    $(".list-group").empty()
  for (i=0 ;i<cities.length; i++){
    console.log(cities[i])
    var citiesLi = document.createElement("li")
     citiesLi.textContent = cities[i]
-    citiesLi.on("click", CurrentWeather(cities[i]))
+    citiesLi.addEventListener("click", function (event){CurrentWeather(event.target.textContent)})
 
     $('.list-group').append(citiesLi).attr("style", "background-color:white ;display:block;" )
 
@@ -174,11 +175,6 @@ function CurrentWeather(city) {
 
         })
       
-        //   // Setting the text of link and the href of the link
-        //   link.textContent = data[i].html_url;
-        //   console.log(link.textContent)
-        //   link.href = data[i].html_url;
-        //   console.log(link.href)w
   
           // Appending the link to the tabledata and then appending the tabledata to the tablerow
           // The tablerow then gets appended to the tablebody
@@ -191,4 +187,7 @@ function CurrentWeather(city) {
   //convert the weather into fahrenheit
   function convert(K) { return Math.floor((K - 273.15) *1.8 +32);  }
 //by wrapping this  into an anonymous function.
-  $("#clear-history").on("click", function() {localStorage.clear()})
+  $("#clear-history").on("click", function() {
+    localStorage.clear()
+  location.reload()
+  })

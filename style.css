@@ -16,6 +16,9 @@
     height: 11rem; 
     width: 8.5rem;
     background-color: skyblue;
+
+    flex-wrap: wrap;
+
 }
 #current-uv{
     width:20px;

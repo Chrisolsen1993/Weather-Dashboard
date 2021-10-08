@@ -13,7 +13,7 @@
 
 .forecast {
     margin: 10px;
-    height: 11rem; 
+    /* height: 11rem;  */
     width: 8.5rem;
     background-color: skyblue;
 
@@ -31,6 +31,9 @@ ul {
   #forecast-weather{
       display: flex;
       flex-direction: row;
-      /* justify-content: flex-end; */
+      /* height: auto;
+      width: 300px; */
+      
+      justify-content: flex-start;
     
   }

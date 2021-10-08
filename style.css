@@ -14,7 +14,7 @@
 .forecast {
     margin: 10px;
     /* height: 11rem;  */
-    width: 8.5rem;
+    /* width: 8.5rem; */
     background-color: skyblue;
 
 }
@@ -28,11 +28,9 @@ ul {
     list-style-type: none;
     
   }
-  .Forecastcolumn{
+  /* .Forecastcolumn{
       display: flex;
-       height: auto;
-      width: 300px; 
-      
+
       justify-content: center;
     
-  }
+  } */

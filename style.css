@@ -17,8 +17,6 @@
     width: 8.5rem;
     background-color: skyblue;
 
-    flex-wrap: wrap;
-
 }
 #current-uv{
     width:20px;
@@ -30,8 +28,9 @@ ul {
     list-style-type: none;
     
   }
-  #forecast5{
-      margin-top: 0px;
-      margin-bottom: 50px;
-      flex-wrap: nowrap;
+  #forecast-weather{
+      display: flex;
+      flex-direction: row;
+      /* justify-content: flex-end; */
+    
   }
